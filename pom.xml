@@ -59,6 +59,10 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
+				    <mainClass>com.adalbertosn.GazinApiV2Application</mainClass>
+					<layers>
+				    	<enabled>true</enabled>
+				    </layers>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
