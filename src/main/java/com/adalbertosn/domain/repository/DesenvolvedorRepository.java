@@ -17,4 +17,5 @@ public interface DesenvolvedorRepository{
 	Desenvolvedor buscar(Long id);
 	Desenvolvedor salvar(Desenvolvedor desenvolvedor);
 	void remover(Long desenvolvedorId);
+	Desenvolvedor findByNome(String nome);
 }

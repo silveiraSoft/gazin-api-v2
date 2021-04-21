@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.adalbertosn.domain.exception.EntidadeEmUsoException;
 import com.adalbertosn.domain.exception.EntidadeNaoEncontradaException;
+import com.adalbertosn.domain.exception.NegocioException;
 import com.adalbertosn.domain.model.Desenvolvedor;
 import com.adalbertosn.domain.repository.DesenvolvedorRepository;
 @Service
@@ -14,8 +15,25 @@ public class CadastroDesenvolvedorService {
 	@Autowired
 	private DesenvolvedorRepository desenvolvedorRepository;
 	
-	public Desenvolvedor salvar(Desenvolvedor Desenvolvedor) {
-		return desenvolvedorRepository.salvar(Desenvolvedor);
+	public Desenvolvedor salvar(Desenvolvedor desenvolvedor) {
+		 
+		
+		//try {
+			//Desenvolvedor desenvolvedorExistente = desenvolvedorRepository.findByNome(desenvolvedor.getNome());
+			Desenvolvedor desenvolvedorExistente = desenvolvedorRepository.findByNome(desenvolvedor.getNome());
+			
+			//System.out.print(desenvolvedorExistente);
+			//return desenvolvedorRepository.salvar(desenvolvedor);
+			
+			if(desenvolvedorExistente != null && !desenvolvedorExistente.equals(desenvolvedor)) {
+				throw new NegocioException("Já existe um desenvolvedro cadastrado com este nome.");
+			}
+			
+			return desenvolvedorRepository.salvar(desenvolvedor);
+		/*
+		}catch(Exception e) {
+			throw new NegocioException("Já existe um desenvolvedro cadastrado com este nome.");
+		}*/
 	}
 	
 	public void excluir(Long desenvolvedorId) {

@@ -10,7 +10,7 @@ import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+//import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import com.sun.istack.NotNull;
@@ -28,6 +28,7 @@ public class Desenvolvedor {
 	private Long id;
 	
 	@NotBlank
+	@Size(max = 255)
 	@Column(nullable=false,length = 255)
 	private String nome;
 	

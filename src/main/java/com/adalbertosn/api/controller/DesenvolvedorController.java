@@ -57,14 +57,16 @@ public class DesenvolvedorController {
 	 * Endpoint para obter dados do desenvolvedor inserido no parâmetro
 	 * Método GET /developers/{id}
 	 * @param desenvolvedorId id do desenvolvedor
-	 * @return 404 se não encontrou o desenvolvedor, ou 200 e o dado do desenvolvedores em formato json
+	 * @return 400 se não encontrou o desenvolvedor, ou 200 e o dado do desenvolvedores em formato json
 	 */
 	@CrossOrigin(origins = "http://localhost")
 	@GetMapping("/{desenvolvedorId}")
-	public ResponseEntity<Desenvolvedor> buscar(@PathVariable("desenvolvedorId") Long desenvolvedorId) {
-        Desenvolvedor desenvolvedor = desenvolvedorRepository.buscar(desenvolvedorId);
+	public ResponseEntity<Desenvolvedor> buscar(@PathVariable("desenvolvedorId") Long desenvolvedorId) {	
 		
-		if (desenvolvedor != null) {
+		Desenvolvedor desenvolvedor = desenvolvedorRepository.buscar(desenvolvedorId);
+		
+		
+        if (desenvolvedor != null) {
 			return ResponseEntity.ok(desenvolvedor);
 		}
 		
@@ -76,7 +78,9 @@ public class DesenvolvedorController {
 	@ResponseStatus(HttpStatus.CREATED)
 	@Transactional
 	public Desenvolvedor adicionar(@Valid @RequestBody Desenvolvedor desenvolvedor) {
-		return desenvolvedorRepository.salvar(desenvolvedor);
+		//return desenvolvedorRepository.salvar(desenvolvedor);
+		return cadastroDesenvolvedor.salvar(desenvolvedor);
+		
 	}
 
 	@CrossOrigin(origins = "http://localhost")
@@ -84,6 +88,7 @@ public class DesenvolvedorController {
 	public ResponseEntity<Desenvolvedor> atualizar(@Valid @PathVariable("desenvolvedorId") Long desenvolvedorId,
 			@RequestBody Desenvolvedor desenvolvedor) {
 		Desenvolvedor desenvolvedorAtual = desenvolvedorRepository.buscar(desenvolvedorId);
+		//Desenvolvedor desenvolvedorAtual = desenvolvedorRepository.buscar(desenvolvedorId);
 		
 		if (desenvolvedorAtual != null) {
 			BeanUtils.copyProperties(desenvolvedor, desenvolvedorAtual, "id");
